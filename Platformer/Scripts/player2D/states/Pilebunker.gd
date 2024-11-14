@@ -1,5 +1,19 @@
 extends PlayerState
 
+func _ready():
+	is_available = true
+	is_cancelable = false
+	is_normal_cancelable = false
+	is_special_cancelable = false
+	is_super_cancelable = true
+	is_jump_cancelable = false
+	is_crouch_cancelable = false
+	is_fall_cancelable = false
+	cancel_options = []
+	default_input = ["5C"]
+	attack_type = "special"
+	air_ok = false
+	ground_ok = true
 
 func enter():
 	player.speed_vector = Vector2.ZERO
@@ -13,12 +27,6 @@ func physics_process_state(delta: float) -> void:
 				Vector2.ZERO, player.running_acceleration * delta)
 	player.velocity = player.speed_vector
 	player.move_and_slide()
-	
-	if is_cancelable:
-		if (!player.dummy and Input.is_action_pressed("lightAttack")):
-			transitioned.emit(self, "5A")
-		if (!player.dummy and Input.is_action_pressed("HevyAttack")):
-			transitioned.emit(self, "Pilebunker")
 
 func exit():
 	pass

@@ -1,5 +1,20 @@
 extends PlayerState
 
+func _ready():
+	is_available = true
+	is_cancelable = true
+	is_normal_cancelable = true
+	is_special_cancelable = true
+	is_super_cancelable = true
+	is_jump_cancelable = false
+	is_crouch_cancelable = false
+	is_fall_cancelable = true
+	cancel_options = []
+	default_input = []
+	attack_type = "none"
+	air_ok = true
+	ground_ok = false
+
 func enter():
 	pass
 

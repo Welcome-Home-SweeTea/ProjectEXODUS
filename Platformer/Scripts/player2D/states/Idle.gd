@@ -1,5 +1,18 @@
 extends PlayerState
 
+func _ready():
+	is_available = true
+	is_cancelable = true
+	is_normal_cancelable = true
+	is_special_cancelable = true
+	is_super_cancelable = true
+	is_jump_cancelable = true
+	is_crouch_cancelable = true
+	cancel_options = []
+	default_input = []
+	attack_type = "none"
+	air_ok = false
+	ground_ok = true
 
 func enter():
 	player.anim_player.play("idle")
@@ -24,10 +37,6 @@ func physics_process_state(delta: float) -> void:
 	player.move_and_slide()
 	
 	if player.is_on_floor():
-		if (!player.dummy and Input.is_action_pressed("lightAttack")):
-			transitioned.emit(self, "5A")
-		if (!player.dummy and Input.is_action_pressed("HevyAttack")):
-			transitioned.emit(self, "Pilebunker")
 		if (!player.dummy and running_direction != Vector2.ZERO):
 			transitioned.emit(self, "walk")
 	else:

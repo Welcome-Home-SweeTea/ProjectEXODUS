@@ -28,6 +28,8 @@ func _ready() -> void:
 	#collision_handler = get_node("CollisionHandler")
 	#anim_player = get_node("AnimationPlayer")
 	#state_machine = get_node("PlayerStateMachine")
+	for state in state_machine.get_children():
+		state.player = self
 	state_machine.current_state.enter()
 
 func _physics_process(delta):
