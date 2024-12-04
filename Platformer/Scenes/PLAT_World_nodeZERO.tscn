@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cj05a5k0np0gb"]
+[gd_scene load_steps=6 format=3 uid="uid://cj05a5k0np0gb"]
 
 [ext_resource type="Texture2D" uid="uid://dswu730o4ath2" path="res://Platformer/Sprites/Backgrounds/FightingGame-stage_demo-GRID1.png" id="1_fji8h"]
 [ext_resource type="PackedScene" uid="uid://csyl7mrxup624" path="res://Platformer/Scenes/Player2D.tscn" id="2_cvdlc"]
+[ext_resource type="Script" path="res://Platformer/Scripts/CollisionResolver.gd" id="3_qgyhv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ob3ni"]
 size = Vector2(4895, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a4j1j"]
+size = Vector2(52.5, 1077.5)
 
 [node name="World" type="Node2D"]
 
@@ -15,16 +19,28 @@ offset = Vector2(0, -500)
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(2.5, 525)
 shape = SubResource("RectangleShape2D_ob3ni")
 
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-930, -35)
+shape = SubResource("RectangleShape2D_a4j1j")
+
 [node name="Player" parent="." node_paths=PackedStringArray("opponent") instance=ExtResource("2_cvdlc")]
-position = Vector2(-575, 490)
+position = Vector2(-230, 425)
 opponent = NodePath("../Player2")
 
 [node name="Player2" parent="." node_paths=PackedStringArray("opponent") instance=ExtResource("2_cvdlc")]
-position = Vector2(570, 485)
+position = Vector2(-620, 430)
 dummy = true
 opponent = NodePath("../Player")
+
+[node name="CollisionResolver" type="Node" parent="."]
+script = ExtResource("3_qgyhv")
+characters = [NodePath("../Player"), NodePath("../Player2")]

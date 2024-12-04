@@ -63,6 +63,11 @@ MagikButton={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Stage"
+2d_physics/layer_2="Fighter"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

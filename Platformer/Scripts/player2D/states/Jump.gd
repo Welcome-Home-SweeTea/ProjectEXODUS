@@ -22,8 +22,8 @@ func enter():
 func physics_process_state(delta: float) -> void:
 	player.speed_vector = player.speed_vector.move_toward(
 				Vector2.ZERO, player.running_acceleration * delta)
-	player.velocity = player.speed_vector
-	player.move_and_slide()
+	#player.velocity = player.speed_vector
+	#player.move_and_slide()
 
 func exit():
 	if (current_variation == "7"):
