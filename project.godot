@@ -13,6 +13,7 @@ config_version=5
 config/name="ProjEXODUS_Demo-rpg-vn-storymode"
 run/main_scene="res://Platformer/Scenes/PLAT_World_nodeZERO.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
+run/max_fps=60
 config/icon="res://icon.svg"
 
 [display]

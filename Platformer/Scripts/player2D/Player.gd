@@ -10,7 +10,7 @@ extends CharacterBody2D
 @export var friction = 5*100
 @export var fall_acceleration = 40*100
 @export var running_acceleration = 60*100
-@export var unstuck_speed = 5
+@export var unstuck_speed = 3
 
 @export var opponent : Player
 @export var hitbox : Area2D
@@ -48,11 +48,11 @@ func _physics_process(delta):
 	
 	# get velocity
 	state_machine.physics_process(delta)
-	velocity = speed_vector
+	#velocity = speed_vector
 	
 	# get extra unstuck push force
 	push.x = 0
-	var eps = 0.01
+	var eps = 0
 	var my_col_box = get_collision_borders()
 	var opp_col_box = opponent.get_collision_borders()
 	if (opp_col_box.l < my_col_box.r and my_col_box.l < opp_col_box.r
@@ -66,7 +66,7 @@ func _physics_process(delta):
 			#push.x = float(opp_col_box.r - my_col_box.l) / delta
 	else:
 		push.x = 0
-	velocity += push 
+	#velocity += push 
 	
 	
 	#move_and_collide(velocity)
