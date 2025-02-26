@@ -1,0 +1,97 @@
+[gd_scene load_steps=13 format=3 uid="uid://dd7n2pnu03lwx"]
+
+[ext_resource type="Script" path="res://Platformer/Scripts/Player_script.gd" id="1_e10r4"]
+[ext_resource type="Texture2D" uid="uid://oy7srx41jrep" path="res://icon.svg" id="2_qjwss"]
+[ext_resource type="Texture2D" uid="uid://cowh2doojrrp1" path="res://Platformer/Sprites/Characters/Placeholder/5A_1.png" id="2_xja2m"]
+[ext_resource type="Texture2D" uid="uid://batfamnsd2wo6" path="res://Platformer/Sprites/Characters/Placeholder/idle1.png" id="3_pfh6d"]
+[ext_resource type="Texture2D" uid="uid://2nioex2ilprm" path="res://Platformer/Sprites/Characters/Placeholder/5A_2.png" id="3_wivck"]
+[ext_resource type="Texture2D" uid="uid://d1vbdu1bt2fmm" path="res://Platformer/Sprites/Characters/Placeholder/idle2.png" id="4_2i2wr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ua1k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xja2m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wivck")
+}],
+"loop": false,
+"name": &"5a",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qjwss")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_pfh6d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2i2wr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qqdpr"]
+radius = 5.0
+height = 300.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wc7x"]
+size = Vector2(115, 115)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6t5dc"]
+size = Vector2(145, 267.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gqg7o"]
+size = Vector2(90, 217.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l83mr"]
+size = Vector2(48.4375, 50)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_e10r4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-315, -475)
+scale = Vector2(1.50204, 1.50204)
+sprite_frames = SubResource("SpriteFrames_7ua1k")
+animation = &"idle"
+centered = false
+
+[node name="Floor Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -150)
+scale = Vector2(0.1, 1)
+shape = SubResource("CapsuleShape2D_qqdpr")
+debug_color = Color(0.0760282, 0.268137, 0.417216, 0.42)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionHead2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(45, -330)
+shape = SubResource("RectangleShape2D_0wc7x")
+
+[node name="CollisionBody2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -135)
+shape = SubResource("RectangleShape2D_6t5dc")
+
+[node name="CollisionFlank2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-120, -110)
+shape = SubResource("RectangleShape2D_gqg7o")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -150)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_l83mr")
+disabled = true
+debug_color = Color(0.732343, 0.151715, 0.338267, 0.42)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

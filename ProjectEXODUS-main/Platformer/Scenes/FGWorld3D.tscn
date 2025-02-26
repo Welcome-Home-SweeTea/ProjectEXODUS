@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://squtn44x3koc"]
+
+[ext_resource type="PackedScene" uid="uid://c2ndxiqicx27w" path="res://Platformer/Scenes/Player3D.tscn" id="1_23ja2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nenaj"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gccgx"]
+size = Vector3(60, 2, 60)
+
+[node name="Main" type="Node"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.08056, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_nenaj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_gccgx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.931786, 0.121461, 0.342084, -0.363007, 0.311772, 0.87808, 0, -0.942362, 0.334596, 0, 8.91537, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.282102, 2.7473, 9.6221)
+
+[node name="Player" parent="." node_paths=PackedStringArray("opponent") instance=ExtResource("1_23ja2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8451, 1.31285, 0)
+opponent = NodePath("../Player2")
+
+[node name="Player2" parent="." node_paths=PackedStringArray("opponent") instance=ExtResource("1_23ja2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.14164, 1.37279, 0)
+dummy = true
+opponent = NodePath("../Player")

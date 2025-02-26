@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfoynvxuwjw7x"]
+
+[ext_resource type="Script" path="res://fi_ghtng/fightng_stage_cam1.gd" id="1_lffgg"]
+
+[node name="Camera2D" type="Camera2D"]
+offset = Vector2(0, -400)
+position_smoothing_enabled = true
+position_smoothing_speed = 30.0
+script = ExtResource("1_lffgg")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(0, -464)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D"]
+polygon = PackedVector2Array(1408, 1232, 1408, -1072, -1408, -1072, -1408, 1232, -1728, 1232, -1728, -1392, 1728, -1392, 1728, 1232)
+
+[node name="Limits" type="Node2D" parent="."]
+
+[node name="Limit1" type="Marker2D" parent="Limits"]
+position = Vector2(-976, -952)
+
+[node name="Limit2" type="Marker2D" parent="Limits"]
+position = Vector2(976, 152)
