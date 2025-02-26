@@ -29,7 +29,6 @@ func _physics_process(delta: float) -> void:
 			input_state.direction -= 1
 		if Input.is_action_pressed("Jump"):
 			input_state.direction += 3
-		#input_state.direction += 3
 		if Input.is_action_pressed("Crouch"):
 			input_state.direction -= 3
 		input_state.buttons[0] = Input.is_action_pressed("lightAttack")

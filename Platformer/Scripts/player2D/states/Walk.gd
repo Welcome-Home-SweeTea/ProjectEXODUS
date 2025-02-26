@@ -21,17 +21,17 @@ func enter():
 func physics_process_state(delta: float) -> void:
 	var running_direction = player.get_input_direction()
 
-	if player.on_floor:
+	if player.is_on_floor():
 		if running_direction != Vector2.ZERO:
 			running_direction = running_direction.normalized()
 			player.speed_vector = player.speed_vector.move_toward(
 				running_direction * player.walk_speed, player.running_acceleration * delta)
 		player.speed = player.speed_vector.length()
 	
-	#player.velocity = player.speed_vector + player.push
-	#player.move_and_slide()
+	player.velocity = player.speed_vector
+	player.move_and_slide()
 	
-	if player.on_floor:
+	if player.is_on_floor():
 		if (!player.dummy and running_direction == Vector2.ZERO):
 			transitioned.emit(self, "idle")
 	else:

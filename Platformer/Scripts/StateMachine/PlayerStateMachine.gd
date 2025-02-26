@@ -49,7 +49,7 @@ func _process(delta):
 		current_state.process_state(delta)
 
 
-func physics_process(delta):
+func _physics_process(delta):
 	# going through moves that can activate by given input, pick first available
 	# [TODO: add move priority check]
 	var next_state
@@ -64,9 +64,9 @@ func physics_process(delta):
 						if !(current_state.cancel_options.has(state.name.to_lower())
 						 and state.is_available):
 							cancel_is_valid = false
-						if (!state.ground_ok and state.player.on_floor):
+						if (!state.ground_ok and state.player.is_on_floor()):
 							cancel_is_valid = false
-						if (!state.air_ok and !state.player.on_floor):
+						if (!state.air_ok and !state.player.is_on_floor()):
 							cancel_is_valid = false
 						if cancel_is_valid:
 							next_state = state

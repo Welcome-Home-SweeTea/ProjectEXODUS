@@ -23,8 +23,9 @@
 [ext_resource type="Texture2D" uid="uid://5axwwc7qugvi" path="res://Platformer/Sprites/Characters/Placeholder/ds2.png" id="19_q3ccx"]
 [ext_resource type="Texture2D" uid="uid://y6xh0egpqn8" path="res://Platformer/Sprites/Characters/Placeholder/ds3.png" id="20_qcrrg"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ggpg"]
-size = Vector2(70, 255)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qqdpr"]
+radius = 40.0
+height = 260.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6t5dc"]
 size = Vector2(110, 258.75)
@@ -596,9 +597,6 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hitbox", "hurtbox", "collision_shape", "collision_handler", "hitspark_sprite", "anim_player", "state_machine")]
-collision_layer = 2
-platform_floor_layers = 4294901761
-platform_wall_layers = 1
 script = ExtResource("1_rsva8")
 hitbox = NodePath("Hitbox")
 hurtbox = NodePath("Hurtbox")
@@ -613,8 +611,8 @@ position = Vector2(-80, -157)
 texture = ExtResource("5_wfn11")
 
 [node name="Collision box" type="CollisionShape2D" parent="."]
-position = Vector2(10, -127.5)
-shape = SubResource("RectangleShape2D_0ggpg")
+position = Vector2(0, -130)
+shape = SubResource("CapsuleShape2D_qqdpr")
 debug_color = Color(0.0760282, 0.268137, 0.417216, 0.42)
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -622,7 +620,6 @@ debug_color = Color(0.0760282, 0.268137, 0.417216, 0.42)
 [node name="CollisionBody2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -130)
 shape = SubResource("RectangleShape2D_6t5dc")
-debug_color = Color(3.80233e-06, 0.645691, 0.254461, 0.42)
 
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(0, -150)

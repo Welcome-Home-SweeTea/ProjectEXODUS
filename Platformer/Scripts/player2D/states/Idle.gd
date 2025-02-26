@@ -17,6 +17,9 @@ func _ready():
 func enter():
 	player.anim_player.play("idle")
 
+func process_state(delta: float):
+	pass
+
 func physics_process_state(delta: float) -> void:
 	var running_direction = player.get_input_direction()
 		
@@ -29,11 +32,11 @@ func physics_process_state(delta: float) -> void:
 				Vector2.ZERO, player.running_acceleration * delta)
 	player.speed_vector.y += player.fall_acceleration * delta
 
-	## Moving the Character
-	#player.velocity = player.speed_vector
-	#player.move_and_slide()
+	# Moving the Character
+	player.velocity = player.speed_vector
+	player.move_and_slide()
 	
-	if player.on_floor:
+	if player.is_on_floor():
 		if (!player.dummy and running_direction != Vector2.ZERO):
 			transitioned.emit(self, "walk")
 	else:
